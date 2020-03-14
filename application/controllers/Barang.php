@@ -12,6 +12,8 @@ class Barang extends CI_Controller
 		//memuat model
 		$this->load->model('Barang_model');
 		$this->model = $this->Barang_model;
+		//memuat library database
+		$this->load->database();
 	}
 
 	public function index()
@@ -52,7 +54,33 @@ class Barang extends CI_Controller
 		$this->model->delete();
 		*/
 
+		/*metode result()
 		$query = $this->db->query('SELECT * FROM barang');
 		$this->load->view('query_result_view',['query'=>$query]);
+		*/
+
+		/*metode result_array()
+		$query = $this->db->query('SELECT * FROM barang');
+		$this->load->view('query_result_array_view',['query'=>$query]);
+		*/
+
+		/*metode row() dan row_array()
+		$query = $this->db->query('SELECT * FROM barang');
+		$this->load->view('query_row_view',['query'=>$query]);
+		*/
+
+
+		$this->model->kode = 'B004';
+		$this->model->nama = 'Penggaris Plastik';
+		$this->model->harga = '5000';
+		$this->model->stock = '20';
+
+		//menambah satu baris data ke dalam tabel barang
+		$this->model->insert();
+		$n = $this->db->affected_rows();
+
+		$query = $this->db->query('SELECT * FROM barang');
+		$this->load->view('affected_rows_view',['query'=> $query, 'n'=> $n]);
+
 	}
 }
