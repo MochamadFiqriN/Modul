@@ -6,7 +6,7 @@ class Barang extends CI_Controller
 {
 	public $model = NULL;
 	
-	function __construct()
+	public function __construct()
 	{
 		parent::__construct();
 		//memuat model
@@ -69,7 +69,7 @@ class Barang extends CI_Controller
 		$this->load->view('query_row_view',['query'=>$query]);
 		*/
 
-
+		/*metode affected rows()
 		$this->model->kode = 'B004';
 		$this->model->nama = 'Penggaris Plastik';
 		$this->model->harga = '5000';
@@ -81,6 +81,36 @@ class Barang extends CI_Controller
 
 		$query = $this->db->query('SELECT * FROM barang');
 		$this->load->view('affected_rows_view',['query'=> $query, 'n'=> $n]);
+		*/
 
+		/*metode last_query()
+		echo '<h2>Demo Metode last_query()</h2>';
+		
+		$query1 = $this->db->query("SELECT * FROM barang");
+		$query2	= $this->db->query("SHOW DATABASES");
+
+		$str = $this->db->last_query();
+		echo 'Statemen SQL terakhir: ' . $str;
+		*/
+
+		/* Metode platform() dan version()
+		echo '<h2>Demo Metode platform() dan version()</h2>';
+		echo 'Jenis database: ' . $this->db->platform() . '<br/>';
+		echo 'Versi: ' . $this->db->version();
+		*/
+
+		echo '<h2>Demo Metode insert_string()</h2>';
+		$data = [
+			'nama' => 'Buku Tulis',
+			'harga' => '10000',
+			'stock' => '36'];
+		$where = "kode = 'B005'";
+
+		$sql = $this->db->update_string('barang', $data, $where);
+
+		echo 'SQL:' . $sql . '<br /><br />';
+		//mengeksekusi SQL
+		$this->db->query($sql);
+		echo $this->db->affected_rows() . ' baris di dalam tabel barang telah diubah.';
 	}
 }

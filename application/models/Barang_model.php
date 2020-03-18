@@ -29,7 +29,7 @@ class Barang_model extends CI_Model
 		$this->db->query($sql);
 	}
 
-	//metode untik mengubah baris data di dalam tabel
+	//metode untuk mengubah baris data di dalam tabel
 	public function update()
 	{
 		$sql = sprintf("UPDATE barang SET nama = '%s', harga = %f, stock= %d". 
@@ -42,7 +42,7 @@ class Barang_model extends CI_Model
 		$this->db->query($sql);
 	}
 
-	//metode untik menghapus baris data di dalam tabel
+	//metode untuk menghapus baris data di dalam tabel
 	public function delete()
 	{
 		$sql = sprintf("DELETE FROM barang ". 
@@ -50,6 +50,14 @@ class Barang_model extends CI_Model
 					$this->kode
 				);
 		$this->db->query($sql);
+	}
+
+	//metode untuk melakukan seleksi data
+	public function read()
+	{
+		$sql = "SELECT * FROM barang ORDER BY kode";
+		$query = $this->db->query($sql);
+		return $query->result();
 	}
 
 	private function _attributeLabels(){
